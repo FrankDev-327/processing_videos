@@ -2,7 +2,6 @@ services:
   media:
     image: media-api
     container_name: ms_media_api
-    #command: node dist/src/main
     ports:
       - "4001:4001"
     depends_on:
