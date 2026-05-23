@@ -89,6 +89,7 @@ This means any MP4 file placed in `./shared` on your machine is automatically ac
 | GET    | `/media`     | List all files                      |
 | GET    | `/media/:id` | Get single file detail              |
 | DELETE | `/media/:id` | Delete file record and init segment |
+  ------   ------------   -----------------------------------
 
 ### Start Processing
 ```http
@@ -142,6 +143,8 @@ Client → POST /media { "path": "/shared/video.mp4" }
 - The original MP4 file is never modified or deleted
 - Only the extracted init segment (`_init.mp4`) is deleted when calling `DELETE /media/:id`
 - Database migrations run automatically on startup before the API starts
+- PostgreSQL is assigned a static IP (`10.5.1.10`) within the Docker network to simplify inter-service communication
+- - It is recommended to use [pgAdmin](https://www.pgadmin.org/) to inspect and verify the database records during testing. Connect using the PostgreSQL credentials  from the root `.env` file on host `10.5.1.10` port `5432` and user and password
 
 ---
 

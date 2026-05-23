@@ -5,10 +5,8 @@ import (
 	"log"
 	"mp4-processor/processor"
 	"strings"
-
 	"github.com/nats-io/nats.go"
 )
-
 
 type NatsWrapper struct {
 	Pattern string          `json:"pattern"`

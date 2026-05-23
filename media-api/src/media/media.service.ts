@@ -1,4 +1,3 @@
-
 import * as fs from 'fs';
 import { Repository } from 'typeorm';
 import { Inject, Injectable } from '@nestjs/common';
@@ -53,7 +52,7 @@ export class MediaService {
     async update(id: string, updateFileDto: UpdateFileDto): Promise<FileEntity> {
         try {
             await this.fileRepository.update(id, updateFileDto);
-            return this.fileRepository.findOneBy({ id });
+            return await this.fileRepository.findOneBy({ id });
         } catch (error) {
             this.loggerServ.error(error)
         }

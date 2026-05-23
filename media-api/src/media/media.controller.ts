@@ -20,10 +20,10 @@ import { FileEntity } from '../entities/files.entity';
 export class MediaController {
     constructor(private readonly mediaService: MediaService) { }
 
+    @Post()
     @ApiOperation({ summary: 'Insert a new media item' })
     @ApiBadRequestResponse({ status: '4XX' })
     @ApiOkResponse({ type: FileResponseDto })
-    @Post()
     async create(@Body() createFileDto: CreateFileDto): Promise<FileEntity> {
         return this.mediaService.create(createFileDto);
     }
@@ -40,6 +40,7 @@ export class MediaController {
 
     @Get()
     @ApiOkResponse({ type: [FileResponseDto] })
+    @ApiBadRequestResponse({ status: '4XX' })
     @ApiOperation({ summary: 'Get all media items' })
     async findAll(): Promise<FileEntity[]> {
         return this.mediaService.findAll();

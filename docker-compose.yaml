@@ -59,8 +59,8 @@ services:
       - media_network
 
 volumes:
-  pg_db_media_data:
   media_api:
+  pg_db_media_data:
 
 networks:
   media_network:
