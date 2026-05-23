@@ -1,0 +1,75 @@
+services:
+  media:
+    image: media-api
+    container_name: ms_media_api
+    #command: node dist/src/main
+    ports:
+      - "4001:4001"
+    depends_on:
+      - postgres_db
+    env_file:
+      - ./media-api/.env
+    build:
+      context: ./media-api
+      dockerfile: Dockerfile
+    networks:
+      - media_network
+      - db_media_network
+    volumes:
+      - media_api:/app
+      - ./shared:/shared
+    restart: always
+
+  postgres_db:
+    image: postgres:15
+    container_name: postgres_media_db
+    shm_size: 512mb
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_USER: ${DB_USER_NAME}
+      POSTGRES_PASSWORD: ${DB_USER_PASSWORD}
+      POSTGRES_DB: ${DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_db_media_data:/var/lib/postgresql/data
+    networks:
+      db_media_network:
+        ipv4_address: 10.5.1.10
+    restart: always
+
+  processor:
+    image: mp4-processor
+    container_name: ms_mp4-processor
+    build:
+      context: ./mp4-processor
+      dockerfile: Dockerfile
+    depends_on:
+      - nats_service
+    volumes:
+      - ./shared:/shared
+    networks:
+      - media_network
+
+  nats_service:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+    networks:
+      - media_network
+
+
+volumes:
+  pg_db_media_data:
+  media_api:
+
+networks:
+  media_network:
+    driver: bridge
+  db_media_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.1.0/24
+          gateway: 10.5.1.1

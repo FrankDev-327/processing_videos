@@ -1,0 +1,45 @@
+# Git
+.git
+.gitignore
+
+# IDEs / editors
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Build output
+bin/
+dist/
+build/
+out/
+
+# Go build cache / coverage
+*.test
+coverage.out
+cover.out
+
+# Vendor (ONLY if you use Go modules download inside Docker)
+# remove this line if you COPY vendor/
+vendor/
+
+# Temporary files
+tmp/
+temp/
+
+
+# Documentation
+*.md
+
+# Local configs
+docker-compose.yml
+docker-compose.override.yml

@@ -1,0 +1,20 @@
+# editor
+.vscode
+
+# env files
+.env
+media-api/.env
+
+# node
+media-api/node_modules
+media-api/dist
+
+# logs
+media-api/logs
+media-api/ormlogs.log
+
+# shared video files
+shared/
+
+# docker
+*.log

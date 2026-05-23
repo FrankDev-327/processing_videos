@@ -1,0 +1,8 @@
+node_modules
+dist
+logs
+*.log
+*.tmp
+.vscode
+.eslintrc.js
+.prettierrc
