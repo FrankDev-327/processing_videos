@@ -47,24 +47,19 @@ cd processing_videos
 mkdir shared
 ```
 
-### 3. Add an MP4 file to the shared folder
+### 3. Set up environment variables
+
+There are two `.env` files required:
+
+**Root `.env`** — used by Docker Compose for PostgreSQL configuration.
+Create a `.env` file in the project root. This file will be provided separately via email.
+
+**`media-api/.env`** — used by the NestJS API service.
+This file will be provided separately via email. Place it inside the `media-api/` folder:
+
+### 4. Run the project
 ```bash
-wget -O ./shared/video.mp4 http://devel.uniqcast.com/general/mp4_testing/video.mp4
-```
-
-### 4. Set up environment variables
-Create a `.env` file in the project root for PostgreSQL:
-```env
-DB_USER_NAME=postgres
-DB_USER_PASSWORD=postgres
-DATABASE=media_db
-```
-
-Environment variables for `media-api` will be provided separately via email.
-
-### 5. Run the project
-```bash
-docker-compose up --build
+docker-compose up
 ```
 
 The API will be available at `http://localhost:4001`
@@ -103,6 +98,18 @@ Content-Type: application/json
 {
   "path": "/shared/video.mp4"
 }
+
+OR
+
+{
+  "path": "/shared/books.mp4"
+}
+
+OR
+
+{
+  "path": "/shared/cars.mp4"
+}
 ```
 
 The path must be an absolute path accessible inside the container via the shared volume.
@@ -110,6 +117,7 @@ The path must be an absolute path accessible inside the container via the shared
 ---
 
 ## Flow
+
 Client → POST /media { "path": "/shared/video.mp4" }
 → media-api saves record with status "processing"
 → media-api publishes to NATS "file.process"
@@ -118,7 +126,6 @@ Client → POST /media { "path": "/shared/video.mp4" }
 → mp4-processor writes /shared/video_init.mp4
 → mp4-processor publishes result to NATS "file.result"
 → media-api receives result and updates DB
-
 
 ---
 
@@ -135,3 +142,9 @@ Client → POST /media { "path": "/shared/video.mp4" }
 - The original MP4 file is never modified or deleted
 - Only the extracted init segment (`_init.mp4`) is deleted when calling `DELETE /media/:id`
 - Database migrations run automatically on startup before the API starts
+
+---
+
+## Testing
+
+A Postman collection JSON file is included in the repository. Import it into Postman to test all available endpoints.

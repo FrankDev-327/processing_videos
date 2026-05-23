@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "baae591a-eefc-4277-9a3c-63eb310ec705",
+		"name": "Medias",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31128853"
+	},
+	"item": [
+		{
+			"name": "Start video process",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"path\": \"/shared/books.mp4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/media",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"media"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List files info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/media",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"media"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get details of a file",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/media/d499abc4-be02-41bd-b0de-6c5d86a186b7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"media",
+						"d499abc4-be02-41bd-b0de-6c5d86a186b7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete init file from disk and database",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/media/b6139084-c6c7-4fdd-b3bb-34e6bfad9bd5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"media",
+						"b6139084-c6c7-4fdd-b3bb-34e6bfad9bd5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
